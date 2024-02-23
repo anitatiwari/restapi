@@ -1,0 +1,41 @@
+openapi: 3.1.0
+info:
+  title: Weather API
+  description: RESTful API for retrieving weather forecasts
+  version: 1.0.0
+
+
+paths:
+  /current:
+    get:
+      summary: Get current weather
+      description: Retrieve current weather for a specified location
+      parameters:
+        - in: query
+          name: location
+          required: true
+          description: The location to retrieve weather for (city name or latitude/longitude)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather'
+
+components:
+  schemas:
+    Weather:
+      type: object
+      properties:
+        temperature:
+          type: number
+          description: Current temperature in Celsius
+        humidity:
+          type: number
+          description: Humidity percentage
+        description:
+          type: string
+          description: Description of weather conditions
